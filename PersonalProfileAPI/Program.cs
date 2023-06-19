@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using PersonalProfileAPI.Data;
+using PersonalProfileAPI.Mappings;
+using PersonalProfileAPI.Repository;
 
 namespace PersonalProfileAPI
 {
@@ -17,8 +19,12 @@ namespace PersonalProfileAPI
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
+			builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
 			builder.Services.AddDbContext<PersonalProfileDbContext>(options =>
 			options.UseSqlServer(builder.Configuration.GetConnectionString("PersonalProfileConnectionString")));
+
+			builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 
 			var app = builder.Build();
 
