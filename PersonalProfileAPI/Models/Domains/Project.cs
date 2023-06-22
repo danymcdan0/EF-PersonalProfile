@@ -10,12 +10,12 @@
 
 		public string Aim { get; set; }
 
-		//public List<string> Skills { get; set; }
-
-		//public List<string> Tools { get; set; }
-
-		//public Education? Dissertation { get; set; }
-
 		public string? ImageUrl { get; set; }
-	}
+
+        //public List<string> Skills { get; set; }
+
+        //public List<string> Tools { get; set; }
+
+        //public Education? Dissertation { get; set; }
+    }
 }

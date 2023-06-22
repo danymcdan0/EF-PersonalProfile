@@ -56,7 +56,6 @@ namespace PersonalProfileAPI.Repository
                 await dbContext.SaveChangesAsync();
             }
             return existingEducation;
-
         }
     }
 }

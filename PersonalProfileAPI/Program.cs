@@ -26,6 +26,7 @@ namespace PersonalProfileAPI
 
 			builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 			builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
+			builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
 			var app = builder.Build();
 

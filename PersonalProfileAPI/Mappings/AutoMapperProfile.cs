@@ -15,6 +15,11 @@ namespace PersonalProfileAPI.Mappings
             CreateMap<Experience, ExperienceDTO>().ReverseMap();
             CreateMap<Experience, AddExperienceDTO>().ReverseMap();
             CreateMap<Experience, UpdateExperienceDTO>().ReverseMap();
+
+
+            CreateMap<Project, ProjectDTO>().ReverseMap();
+            CreateMap<Project, AddProjectDTO>().ReverseMap();
+            CreateMap<Project, UpdateProjectDTO>().ReverseMap();
         }
     }
 }
