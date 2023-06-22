@@ -25,6 +25,7 @@ namespace PersonalProfileAPI
 			options.UseSqlServer(builder.Configuration.GetConnectionString("PersonalProfileConnectionString")));
 
 			builder.Services.AddScoped<IEducationRepository, EducationRepository>();
+			builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 
 			var app = builder.Build();
 

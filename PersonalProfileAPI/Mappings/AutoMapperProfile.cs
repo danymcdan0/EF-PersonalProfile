@@ -11,6 +11,10 @@ namespace PersonalProfileAPI.Mappings
             CreateMap<Education, EducationDTO>().ReverseMap();
             CreateMap<Education, AddEducationDTO>().ReverseMap();
             CreateMap<Education, UpdateEducationDTO>().ReverseMap();
+
+            CreateMap<Experience, ExperienceDTO>().ReverseMap();
+            CreateMap<Experience, AddExperienceDTO>().ReverseMap();
+            CreateMap<Experience, UpdateExperienceDTO>().ReverseMap();
         }
     }
 }

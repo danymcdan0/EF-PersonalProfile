@@ -13,6 +13,6 @@ namespace PersonalProfileAPI.Repository
 
         public Task<Education?> DeleteAsync(Guid id);
 
-        public Task<Education> UpdateAsync(Guid id, Education education);
+        public Task<Education?> UpdateAsync(Guid id, Education education);
     }
 }

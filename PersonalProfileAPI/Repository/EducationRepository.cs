@@ -28,10 +28,6 @@ namespace PersonalProfileAPI.Repository
         public async Task<Education?> GetByIdAsync(Guid id)
         {
             var education = await dbContext.Education.FirstOrDefaultAsync(e => e.Id == id);
-            if (education == null)
-            {
-                return null;
-            }
             return education;
         }
 

@@ -22,7 +22,7 @@ namespace PersonalProfileAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
             var educationDomains = await educationRepository.GetAllAsync();
             var educactionDTOs = mapper.Map<List<EducationDTO>>(educationDomains);
@@ -31,7 +31,7 @@ namespace PersonalProfileAPI.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetByIdAsync([FromRoute] Guid id)
         {
             var educationDomain = await educationRepository.GetByIdAsync(id);
             if (educationDomain == null)
@@ -45,17 +45,21 @@ namespace PersonalProfileAPI.Controllers
 
         [HttpPost]
         [ValidateModel]
-        public async Task<IActionResult> Create([FromBody] AddEducationDTO addEducationDTO) 
+        public async Task<IActionResult> CreateAsync([FromBody] AddEducationDTO addEducationDTO) 
         {
             var educationDomain = mapper.Map<Education>(addEducationDTO);
             var createEducation = await educationRepository.CreateAsync(educationDomain);
-            return Ok(mapper.Map<EducationDTO>(educationDomain));
+            if (createEducation != null)
+            {
+                return Ok(mapper.Map<EducationDTO>(educationDomain));
+            }
+            return BadRequest();
         }
 
         [HttpPut]
         [ValidateModel]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, UpdateEducationDTO updateEducationDTO) 
+        public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, UpdateEducationDTO updateEducationDTO) 
         {
             var educationDomain = mapper.Map<Education>(updateEducationDTO);
             var updateEducation = await educationRepository.UpdateAsync(id, educationDomain);
@@ -68,13 +72,10 @@ namespace PersonalProfileAPI.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> Delete(Guid id) 
+        public async Task<IActionResult> DeleteAsync(Guid id) 
         {
             var educationDomain = await educationRepository.DeleteAsync(id);
-            if (educationDomain == null)
-            {
-                return NotFound(id);
-            }
+            if (educationDomain == null) { return NotFound(id); }
             return Ok(mapper.Map<EducationDTO>(educationDomain));
         }
     }
