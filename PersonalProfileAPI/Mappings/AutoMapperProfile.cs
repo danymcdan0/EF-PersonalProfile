@@ -9,6 +9,8 @@ namespace PersonalProfileAPI.Mappings
         public AutoMapperProfile()
         {
             CreateMap<Education, EducationDTO>().ReverseMap();
+            CreateMap<Education, AddEducationDTO>().ReverseMap();
+            CreateMap<Education, UpdateEducationDTO>().ReverseMap();
         }
     }
 }
