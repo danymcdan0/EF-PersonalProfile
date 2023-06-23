@@ -1,12 +1,13 @@
-
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PersonalProfileAPI.Data;
 using PersonalProfileAPI.Mappings;
+using PersonalProfileAPI.Models.Domains;
 using PersonalProfileAPI.Repository;
 
 namespace PersonalProfileAPI
 {
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{
@@ -24,7 +25,11 @@ namespace PersonalProfileAPI
 			builder.Services.AddDbContext<PersonalProfileDbContext>(options =>
 			options.UseSqlServer(builder.Configuration.GetConnectionString("PersonalProfileConnectionString")));
 
-			builder.Services.AddScoped<IEducationRepository, EducationRepository>();
+			builder.Services.AddIdentityCore<Owner>(options => options.SignIn.RequireConfirmedAccount = false)
+				.AddRoles<IdentityRole>()
+				.AddEntityFrameworkStores<PersonalProfileDbContext>();
+
+            builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 			builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 			builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 

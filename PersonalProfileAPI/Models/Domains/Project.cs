@@ -12,10 +12,10 @@
 
 		public string? ImageUrl { get; set; }
 
-        //public List<string> Skills { get; set; }
+        //public ICollection<string?> Skills { get; set; }
 
-        //public List<string> Tools { get; set; }
+        //public ICollection<string?> Tools { get; set; }
 
-        //public Education? Dissertation { get; set; }
+        //public Guid? EducationId { get; set; }
     }
 }
