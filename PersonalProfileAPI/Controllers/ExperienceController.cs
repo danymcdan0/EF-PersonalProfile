@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonalProfileAPI.CustomActionFilters;
 using PersonalProfileAPI.Models.Domains;
 using PersonalProfileAPI.Models.DTOs;
 using PersonalProfileAPI.Repository;
+using System.Data;
 
 namespace PersonalProfileAPI.Controllers
 {
@@ -42,7 +44,8 @@ namespace PersonalProfileAPI.Controllers
             return Ok(educactionDTO);
         }
 
-        [HttpPost]
+		[Authorize(Roles = "Owner")]
+		[HttpPost]
         [ValidateModel]
         public async Task<IActionResult> CreateAsync([FromBody] AddExperienceDTO addExperienceDTO)
         {
@@ -55,7 +58,8 @@ namespace PersonalProfileAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
+		[Authorize(Roles = "Owner")]
+		[HttpPut]
         [ValidateModel]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, UpdateExperienceDTO updateExperienceDTO)
@@ -69,7 +73,8 @@ namespace PersonalProfileAPI.Controllers
             return Ok(mapper.Map<ExperienceDTO>(experienceDomain));
         }
 
-        [HttpDelete]
+		[Authorize(Roles = "Owner")]
+		[HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] Guid id) 
         {

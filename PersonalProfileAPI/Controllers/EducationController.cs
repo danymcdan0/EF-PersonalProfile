@@ -5,6 +5,7 @@ using PersonalProfileAPI.Models.Domains;
 using PersonalProfileAPI.Models.DTOs;
 using PersonalProfileAPI.Repository;
 using PersonalProfileAPI.CustomActionFilters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PersonalProfileAPI.Controllers
 {
@@ -42,7 +43,7 @@ namespace PersonalProfileAPI.Controllers
             return Ok(educactionDTO);
         }
 
-
+        [Authorize(Roles = "Owner")]
         [HttpPost]
         [ValidateModel]
         public async Task<IActionResult> CreateAsync([FromBody] AddEducationDTO addEducationDTO) 
@@ -56,7 +57,8 @@ namespace PersonalProfileAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
+		[Authorize(Roles = "Owner")]
+		[HttpPut]
         [ValidateModel]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, UpdateEducationDTO updateEducationDTO) 
@@ -70,7 +72,8 @@ namespace PersonalProfileAPI.Controllers
             return Ok(mapper.Map<EducationDTO>(educationDomain));
         }
 
-        [HttpDelete]
+		[Authorize(Roles = "Owner")]
+		[HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id) 
         {

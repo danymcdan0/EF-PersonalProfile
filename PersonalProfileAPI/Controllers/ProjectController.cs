@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalProfileAPI.CustomActionFilters;
 using PersonalProfileAPI.Models.Domains;
 using PersonalProfileAPI.Models.DTOs;
 using PersonalProfileAPI.Repository;
+using System.Data;
 
 namespace PersonalProfileAPI.Controllers
 {
@@ -41,8 +43,8 @@ namespace PersonalProfileAPI.Controllers
             return Ok(projectDTO);
         }
 
-
-        [HttpPost]
+		[Authorize(Roles = "Owner")]
+		[HttpPost]
         [ValidateModel]
         public async Task<IActionResult> CreateAsync([FromBody] AddProjectDTO addProjectDTO)
         {
@@ -55,7 +57,8 @@ namespace PersonalProfileAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
+		[Authorize(Roles = "Owner")]
+		[HttpPut]
         [ValidateModel]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, UpdateProjectDTO updateProjectDTO)
@@ -69,7 +72,8 @@ namespace PersonalProfileAPI.Controllers
             return Ok(mapper.Map<ProjectDTO>(projectDomain));
         }
 
-        [HttpDelete]
+		[Authorize(Roles = "Owner")]
+		[HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
