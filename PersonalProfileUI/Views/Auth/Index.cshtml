@@ -1,12 +1,28 @@
-﻿@model IEnumerable<PersonalProfileUI.Models.DTOs.AuthDTO>
+﻿@model PersonalProfileUI.Models.DTOs.LoginRequestDTO
 
 @{
 }
 
 <h1 class="mt-3">Login</h1>
 
-@*<div class="d-felx justify-content-end">
-	<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
-</div>*@
-
+<div class="d-felx justify-content-end">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 
