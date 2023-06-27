@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PersonalProfileUI.Models.DTOs.ExperienceDTO>
+
+@{
+}
+
+<h1 class="mt-3">Education</h1>
+
+@*<div class="d-felx justify-content-end">
+	<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
+</div>*@
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Role</th>
+			<th>Company</th>
+			<th>Description</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var experience in Model)
+		{
+			<tr>
+				<td>@experience.Role</td>
+				<td>@experience.Company</td>
+				<td>@experience.Description</td>
+				<td>@experience.StartDate</td>
+				<td>@experience.EndDate</td>
+@*				<td>
+					<a asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id" class="btn btn-light">Edit</a>
+				</td>*@
+			</tr>
+		}
+	</tbody>
+</table>

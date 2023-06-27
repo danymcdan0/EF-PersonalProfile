@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PersonalProfileUI.Models.DTOs.EducationDTO>
+
+@{
+}
+
+<h1 class="mt-3">Education</h1>
+
+@*<div class="d-felx justify-content-end">
+	<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
+</div>*@
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>University</th>
+			<th>Course</th>
+			<th>Grade</th>
+			<th>Description</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var education in Model)
+		{
+			<tr>
+				<td>@education.University</td>
+				<td>@education.Course</td>
+				<td>@education.Grade</td>
+				<td>@education.Description</td>
+				<td>@education.StartDate</td>
+				<td>@education.EndDate</td>
+@*				<td>
+					<a asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id" class="btn btn-light">Edit</a>
+				</td>*@
+			</tr>
+		}
+	</tbody>
+</table>

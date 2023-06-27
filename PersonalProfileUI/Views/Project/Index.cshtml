@@ -1,0 +1,35 @@
+﻿@model IEnumerable<PersonalProfileUI.Models.DTOs.ProjectDTO>
+
+@{
+}
+
+<h1 class="mt-3">Education</h1>
+
+@*<div class="d-felx justify-content-end">
+	<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
+</div>*@
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Aim</th>
+			<th>Description</th>
+			<th>ImageUrl</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var project in Model)
+		{
+			<tr>
+				<td>@project.Title</td>
+				<td>@project.Aim</td>
+				<td>@project.Description</td>
+				<td>@project.ImageUrl</td>
+@*				<td>
+					<a asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id" class="btn btn-light">Edit</a>
+				</td>*@
+			</tr>
+		}
+	</tbody>
+</table>
