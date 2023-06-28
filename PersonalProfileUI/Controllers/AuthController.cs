@@ -19,7 +19,7 @@ namespace PersonalProfileUI.Controllers
 		}
 
         [HttpPost]
-		public async Task<IActionResult> Index(LoginRequestDTO loginRequestDTO) 
+		public async Task<IActionResult> Submit(LoginRequestDTO loginRequestDTO)
 		{
             //TODO need to be able to call this method from login button
             //TODO need to send the data from the DTO to the API
