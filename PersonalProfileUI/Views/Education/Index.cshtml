@@ -5,9 +5,9 @@
 
 <h1 class="mt-3">Education</h1>
 
-@*<div class="d-felx justify-content-end">
+<div class="d-felx justify-content-end">
 	<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
-</div>*@
+</div>
 
 <table class="table table-bordered">
 	<thead>
@@ -30,9 +30,9 @@
 				<td>@education.Description</td>
 				<td>@education.StartDate</td>
 				<td>@education.EndDate</td>
-@*				<td>
-					<a asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id" class="btn btn-light">Edit</a>
-				</td>*@
+				<td>
+					<a class="btn btn-light" asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id">Edit</a>
+				</td>
 			</tr>
 		}
 	</tbody>

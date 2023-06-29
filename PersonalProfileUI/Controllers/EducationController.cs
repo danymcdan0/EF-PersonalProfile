@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PersonalProfileUI.Models;
 using PersonalProfileUI.Models.DTOs;
 using System.Drawing.Drawing2D;
 using System.Text;
@@ -23,7 +24,6 @@ namespace PersonalProfileUI.Controllers
 
 			try
 			{
-				//Get all regions from Web API
 				var client = httpClientFactory.CreateClient();
 
 				var httpResponseMessage = await client.GetAsync("https://localhost:44385/api/education");
@@ -41,16 +41,22 @@ namespace PersonalProfileUI.Controllers
 			return View(response);
 		}
 
-        [HttpPost]
-        public async Task<IActionResult> Add(AddRegionViewModel addRegionViewModel)
+        [HttpGet]
+        public async Task<IActionResult> Add() 
+        {
+            return View();
+        }
+
+		[HttpPost]
+        public async Task<IActionResult> Add(AddEducationViewModel addEducationViewModel)
         {
             var client = httpClientFactory.CreateClient();
 
             var httpRequestMessage = new HttpRequestMessage()
             {
                 Method = HttpMethod.Post,
-                RequestUri = new Uri("https://localhost:7096/api/regions"),
-                Content = new StringContent(JsonSerializer.Serialize(addRegionViewModel), Encoding.UTF8, "application/json")
+                RequestUri = new Uri("https://localhost:44385/api/education"),
+                Content = new StringContent(JsonSerializer.Serialize(addEducationViewModel), Encoding.UTF8, "application/json")
             };
 
             var httpResponseMessage = await client.SendAsync(httpRequestMessage);
@@ -60,7 +66,7 @@ namespace PersonalProfileUI.Controllers
 
             if (response != null)
             {
-                return RedirectToAction("Index", "Regions");
+                return RedirectToAction("Index", "Education");
             }
 
             return View();
@@ -71,7 +77,7 @@ namespace PersonalProfileUI.Controllers
         {
             var client = httpClientFactory.CreateClient();
 
-            var response = await client.GetFromJsonAsync<EducationDTO>($"https://localhost:7096/api/education/{Id.ToString()}");
+            var response = await client.GetFromJsonAsync<EducationDTO>($"https://localhost:44385/api/education/{Id.ToString()}");
 
             if (response != null)
             {
@@ -89,7 +95,7 @@ namespace PersonalProfileUI.Controllers
             var httpRequestMessage = new HttpRequestMessage()
             {
                 Method = HttpMethod.Put,
-                RequestUri = new Uri($"https://localhost:7096/api/regions/{educationDTO.Id}"),
+                RequestUri = new Uri($"https://localhost:44385/api/education/{educationDTO.Id}"),
                 Content = new StringContent(JsonSerializer.Serialize(educationDTO), Encoding.UTF8, "application/json")
             };
 
@@ -100,23 +106,23 @@ namespace PersonalProfileUI.Controllers
 
             if (response != null)
             {
-                return RedirectToAction("Edit", "Regions");
+                return RedirectToAction("Edit", "Education");
             }
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(EducationDTO regionDTO)
+        public async Task<IActionResult> Delete(EducationDTO educationDTO)
         {
             try
             {
                 var client = httpClientFactory.CreateClient();
 
-                var httpResponseMessage = await client.DeleteAsync($"https://localhost:7096/api/regions/{regionDTO.Id}");
+                var httpResponseMessage = await client.DeleteAsync($"https://localhost:44385/api/education/{educationDTO.Id}");
 
                 httpResponseMessage.EnsureSuccessStatusCode();
 
-                return RedirectToAction("Index", "Regions");
+                return RedirectToAction("Index", "Education");
             }
             catch (Exception ex)
             {
