@@ -6,6 +6,8 @@ using PersonalProfileAPI.Models.Domains;
 
 namespace PersonalProfileAPI.Controllers
 {
+	[Route("api/[controller]")]
+	[ApiController]
 	public class AuthController : ControllerBase
 	{
 		private readonly UserManager<Owner> userManager;
@@ -48,7 +50,6 @@ namespace PersonalProfileAPI.Controllers
 
 				}
 			}
-
 			return BadRequest("Incorrect username or password");
 		}
 	}

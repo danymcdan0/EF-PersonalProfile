@@ -1,4 +1,6 @@
-﻿namespace PersonalProfileUI.Models.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PersonalProfileUI.Models.DTOs
 {
 	public class EducationDTO
 	{
@@ -12,8 +14,13 @@
 
         public string? Description { get; set; }
 
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "{MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
-		public DateTime? EndDate { get; set; }
+		//TODO make NYULLABUL
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "{MM/yyyy}", ApplyFormatInEditMode = true)]
+		public DateTime EndDate { get; set; }
 	}
 }

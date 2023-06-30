@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
+using PersonalProfileUI.Models;
 using PersonalProfileUI.Models.DTOs;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace PersonalProfileUI.Controllers
 {
 	public class AuthController : Controller
 	{
         private readonly IHttpClientFactory httpClientFactory;
+        public string Token { get; set; }
 
         public AuthController(IHttpClientFactory httpClientFactory)
         {
@@ -21,30 +26,39 @@ namespace PersonalProfileUI.Controllers
         [HttpPost]
 		public async Task<IActionResult> Submit(LoginRequestDTO loginRequestDTO)
 		{
-            //TODO need to be able to call this method from login button
-            //TODO need to send the data from the DTO to the API
             try
             {
-                //Get all regions from Web API
                 var client = httpClientFactory.CreateClient();
 
+				var httpRequestMessage = new HttpRequestMessage()
+				{
+					Method = HttpMethod.Post,
+					RequestUri = new Uri("https://localhost:44385/api/Auth/Login"),
+					Content = new StringContent(JsonSerializer.Serialize(loginRequestDTO), Encoding.UTF8, "application/json")
+				};
 
-                //something here -> client(loginRequestDTO)
+				var httpResponseMessage = await client.SendAsync(httpRequestMessage);
+				httpResponseMessage.EnsureSuccessStatusCode();
 
-                var httpResponseMessage = await client.GetAsync("https://localhost:44385/api/Auth/Login");
+				var response = await httpResponseMessage.Content.ReadFromJsonAsync<LoginResponseDTO>();
 
-                httpResponseMessage.EnsureSuccessStatusCode();
+                Token = response.JwtToken;
 
-                //? This should be sending this data to the http client not reading from it
-                var response = await httpResponseMessage.Content.ReadFromJsonAsync<LoginRequestDTO>();
+				HttpContext.Response.Cookies.Append("token", Token,
+				new CookieOptions { Expires = DateTime.Now.AddMinutes(15) });
+			}
 
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Log the exception
-                throw;
-            }
-            return View();
+				return RedirectToAction("Index", "Auth");
+			}
+            return RedirectToAction("Index", "Home");
+		}
+
+        public async Task<string> GetToken() 
+        {
+			var client = httpClientFactory.CreateClient();
+            return "";
 		}
 	}
 }

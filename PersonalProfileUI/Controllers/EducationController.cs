@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using PersonalProfileUI.Models;
 using PersonalProfileUI.Models.DTOs;
 using System.Drawing.Drawing2D;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -22,54 +24,69 @@ namespace PersonalProfileUI.Controllers
 		{
 			List<EducationDTO> response = new List<EducationDTO>();
 
-			try
-			{
-				var client = httpClientFactory.CreateClient();
+			var client = httpClientFactory.CreateClient();
 
-				var httpResponseMessage = await client.GetAsync("https://localhost:44385/api/education");
+			var httpResponseMessage = await client.GetAsync("https://localhost:44385/api/education");
 
-				httpResponseMessage.EnsureSuccessStatusCode();
+			httpResponseMessage.EnsureSuccessStatusCode();
 
-				response.AddRange(await httpResponseMessage.Content.ReadFromJsonAsync<IEnumerable<EducationDTO>>());
+			response.AddRange(await httpResponseMessage.Content.ReadFromJsonAsync<IEnumerable<EducationDTO>>());
 
-			}
-			catch (Exception ex)
-			{
-				//Log the exception
-				throw;
-			}
 			return View(response);
 		}
 
         [HttpGet]
         public async Task<IActionResult> Add() 
         {
-            return View();
+			var client = httpClientFactory.CreateClient();
+
+			var token = "";
+			HttpContext.Request.Cookies.TryGetValue("token", out token);
+
+            if (token != null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Auth");
         }
 
 		[HttpPost]
         public async Task<IActionResult> Add(AddEducationViewModel addEducationViewModel)
         {
-            var client = httpClientFactory.CreateClient();
-
-            var httpRequestMessage = new HttpRequestMessage()
+            try
             {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri("https://localhost:44385/api/education"),
-                Content = new StringContent(JsonSerializer.Serialize(addEducationViewModel), Encoding.UTF8, "application/json")
-            };
+				var client = httpClientFactory.CreateClient();
 
-            var httpResponseMessage = await client.SendAsync(httpRequestMessage);
-            httpResponseMessage.EnsureSuccessStatusCode();
+				var token = "";
 
-            var response = await httpResponseMessage.Content.ReadFromJsonAsync<EducationDTO>();
+				HttpContext.Request.Cookies.TryGetValue("token", out token);
+				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            if (response != null)
+				var httpRequestMessage = new HttpRequestMessage()
+				{
+					Method = HttpMethod.Post,
+					RequestUri = new Uri("https://localhost:44385/api/education"),
+					Content = new StringContent(JsonSerializer.Serialize(addEducationViewModel), Encoding.UTF8, "application/json")
+				};
+
+				var httpResponseMessage = await client.SendAsync(httpRequestMessage);
+				httpResponseMessage.EnsureSuccessStatusCode();
+
+				var response = await httpResponseMessage.Content.ReadFromJsonAsync<EducationDTO>();
+
+				if (response != null)
+				{
+					return RedirectToAction("Index", "Education");
+				}
+
+				return View();
+			}
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Education");
+                return RedirectToAction("Index", "Auth");
             }
-
-            return View();
+            
         }
 
         [HttpGet]
@@ -77,7 +94,15 @@ namespace PersonalProfileUI.Controllers
         {
             var client = httpClientFactory.CreateClient();
 
-            var response = await client.GetFromJsonAsync<EducationDTO>($"https://localhost:44385/api/education/{Id.ToString()}");
+			var token = "";
+			HttpContext.Request.Cookies.TryGetValue("token", out token);
+
+			if (token == null)
+			{
+				return RedirectToAction("Index", "Auth");
+			}
+
+			var response = await client.GetFromJsonAsync<EducationDTO>($"https://localhost:44385/api/education/{Id.ToString()}");
 
             if (response != null)
             {
@@ -90,25 +115,38 @@ namespace PersonalProfileUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EducationDTO educationDTO)
         {
-            var client = httpClientFactory.CreateClient();
-
-            var httpRequestMessage = new HttpRequestMessage()
+            try
             {
-                Method = HttpMethod.Put,
-                RequestUri = new Uri($"https://localhost:44385/api/education/{educationDTO.Id}"),
-                Content = new StringContent(JsonSerializer.Serialize(educationDTO), Encoding.UTF8, "application/json")
-            };
+				var client = httpClientFactory.CreateClient();
+				var token = "";
 
-            var httpResponseMessage = await client.SendAsync(httpRequestMessage);
-            httpResponseMessage.EnsureSuccessStatusCode();
+				HttpContext.Request.Cookies.TryGetValue("token", out token);
+				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var response = await httpResponseMessage.Content.ReadFromJsonAsync<EducationDTO>();
+				var httpRequestMessage = new HttpRequestMessage()
+				{
+					Method = HttpMethod.Put,
+					RequestUri = new Uri($"https://localhost:44385/api/education/{educationDTO.Id}"),
+					Content = new StringContent(JsonSerializer.Serialize(educationDTO), Encoding.UTF8, "application/json")
+				};
 
-            if (response != null)
+				var httpResponseMessage = await client.SendAsync(httpRequestMessage);
+				httpResponseMessage.EnsureSuccessStatusCode();
+
+				var response = await httpResponseMessage.Content.ReadFromJsonAsync<EducationDTO>();
+
+				if (response == null)
+				{
+					return RedirectToAction("Edit", "Education");
+				}
+
+				return RedirectToAction("Index", "Education"); ;
+			}
+            catch (Exception)
             {
-                return RedirectToAction("Edit", "Education");
-            }
-            return View();
+				return RedirectToAction("Index", "Auth");
+			}
+
         }
 
         [HttpPost]
@@ -118,18 +156,21 @@ namespace PersonalProfileUI.Controllers
             {
                 var client = httpClientFactory.CreateClient();
 
-                var httpResponseMessage = await client.DeleteAsync($"https://localhost:44385/api/education/{educationDTO.Id}");
+				var token = "";
+
+				HttpContext.Request.Cookies.TryGetValue("token", out token);
+				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+				var httpResponseMessage = await client.DeleteAsync($"https://localhost:44385/api/education/{educationDTO.Id}");
 
                 httpResponseMessage.EnsureSuccessStatusCode();
 
                 return RedirectToAction("Index", "Education");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //Log or console the error
-            }
-
-            return View("Edit");
+				return RedirectToAction("Index", "Auth");
+			}
         }
     }
 }

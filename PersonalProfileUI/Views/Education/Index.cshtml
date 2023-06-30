@@ -28,8 +28,8 @@
 				<td>@education.Course</td>
 				<td>@education.Grade</td>
 				<td>@education.Description</td>
-				<td>@education.StartDate</td>
-				<td>@education.EndDate</td>
+				<td>@education.StartDate.ToString("MM/yyyy")</td>
+				<td>@education.EndDate.ToString("MM/yyyy")</td>
 				<td>
 					<a class="btn btn-light" asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id">Edit</a>
 				</td>
