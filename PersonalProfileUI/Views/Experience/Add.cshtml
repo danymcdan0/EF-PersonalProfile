@@ -1,24 +1,19 @@
-﻿@model PersonalProfileUI.Models.AddEducationViewModel
+﻿@model PersonalProfileUI.Models.AddExperienceViewModel
 
 @{
 }
 
-<h1 class="mt-3">Add Education</h1>
+<h1 class="mt-3">Add Experience</h1>
 <form method="post" asp-action="Add">
 
 	<div class="mt-3">
-		<label class="form-label">University</label>
-		<input type="text" class="form-control" asp-for="University"/>
-	</div>
-
-		<div class="mt-3">
-		<label class="form-label">Course</label>
-		<input type="text" class="form-control" asp-for="Course"/>
+		<label class="form-label">Company</label>
+		<input type="text" class="form-control" asp-for="Company" />
 	</div>
 
 	<div class="mt-3">
-		<label class="form-label">Grade</label>
-		<input type="text" class="form-control" asp-for="Grade"/>
+		<label class="form-label">Role</label>
+		<input type="text" class="form-control" asp-for="Role"/>
 	</div>
 
 	<div class="mt-3">

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NuGet.Common;
 using PersonalProfileUI.Models;
 using PersonalProfileUI.Models.DTOs;
-using System.Drawing.Drawing2D;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -42,6 +40,7 @@ namespace PersonalProfileUI.Controllers
 
 			var token = "";
 			HttpContext.Request.Cookies.TryGetValue("token", out token);
+
 
             if (token != null)
             {

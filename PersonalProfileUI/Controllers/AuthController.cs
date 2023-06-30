@@ -11,7 +11,6 @@ namespace PersonalProfileUI.Controllers
 	public class AuthController : Controller
 	{
         private readonly IHttpClientFactory httpClientFactory;
-        public string Token { get; set; }
 
         public AuthController(IHttpClientFactory httpClientFactory)
         {
@@ -42,9 +41,9 @@ namespace PersonalProfileUI.Controllers
 
 				var response = await httpResponseMessage.Content.ReadFromJsonAsync<LoginResponseDTO>();
 
-                Token = response.JwtToken;
+                var token = response.JwtToken;
 
-				HttpContext.Response.Cookies.Append("token", Token,
+				HttpContext.Response.Cookies.Append("token", token,
 				new CookieOptions { Expires = DateTime.Now.AddMinutes(15) });
 			}
 
@@ -53,12 +52,6 @@ namespace PersonalProfileUI.Controllers
 				return RedirectToAction("Index", "Auth");
 			}
             return RedirectToAction("Index", "Home");
-		}
-
-        public async Task<string> GetToken() 
-        {
-			var client = httpClientFactory.CreateClient();
-            return "";
 		}
 	}
 }

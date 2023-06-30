@@ -3,7 +3,11 @@
 @{
 }
 
-<h1 class="mt-3">Education</h1>
+<h1 class="mt-3">Experience</h1>
+
+<div class="d-felx justify-content-end">
+	<a class="btn btn-secondary" asp-controller="Experience" asp-action="Add">Add Experience</a>
+</div>
 
 <table class="table table-bordered">
 	<thead>
@@ -24,6 +28,9 @@
 				<td>@experience.Description</td>
 				<td>@experience.StartDate</td>
 				<td>@experience.EndDate</td>
+				<td>
+					<a class="btn btn-light" asp-controller="Experience" asp-action="Edit" asp-route-id="@experience.Id">Edit</a>
+				</td>
 			</tr>
 		}
 	</tbody>
