@@ -5,6 +5,10 @@
 
 <h1 class="mt-3">Education</h1>
 
+<div class="d-felx justify-content-end">
+	<a class="btn btn-secondary" asp-controller="Project" asp-action="Add">Add Project</a>
+</div>
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
@@ -22,6 +26,9 @@
 				<td>@project.Aim</td>
 				<td>@project.Description</td>
 				<td>@project.ImageUrl</td>
+				<td>
+					<a class="btn btn-light" asp-controller="Project" asp-action="Edit" asp-route-id="@project.Id">Edit</a>
+				</td>
 			</tr>
 		}
 	</tbody>
