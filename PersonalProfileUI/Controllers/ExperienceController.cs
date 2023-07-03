@@ -23,7 +23,7 @@ namespace PersonalProfileUI.Controllers
 
 			var client = httpClientFactory.CreateClient();
 
-			var httpResponseMessage = await client.GetAsync("https://localhost:44385/api/Experience");
+			var httpResponseMessage = await client.GetAsync("https://app-personalprofile-dev.azurewebsites.net/api/Experience");
 
 			httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -64,7 +64,7 @@ namespace PersonalProfileUI.Controllers
 				var httpRequestMessage = new HttpRequestMessage()
 				{
 					Method = HttpMethod.Post,
-					RequestUri = new Uri("https://localhost:44385/api/Experience"),
+					RequestUri = new Uri("https://app-personalprofile-dev.azurewebsites.net/api/Experience"),
 					Content = new StringContent(JsonSerializer.Serialize(addExperienceViewModel), Encoding.UTF8, "application/json")
 				};
 
@@ -100,7 +100,7 @@ namespace PersonalProfileUI.Controllers
 				return RedirectToAction("Index", "Auth");
 			}
 
-			var response = await client.GetFromJsonAsync<ExperienceDTO>($"https://localhost:44385/api/Experience/{Id.ToString()}");
+			var response = await client.GetFromJsonAsync<ExperienceDTO>($"https://app-personalprofile-dev.azurewebsites.net/api/Experience/{Id.ToString()}");
 
 			if (response != null)
 			{
@@ -124,7 +124,7 @@ namespace PersonalProfileUI.Controllers
 				var httpRequestMessage = new HttpRequestMessage()
 				{
 					Method = HttpMethod.Put,
-					RequestUri = new Uri($"https://localhost:44385/api/Experience/{experienceDTO.Id}"),
+					RequestUri = new Uri($"https://app-personalprofile-dev.azurewebsites.net/api/Experience/{experienceDTO.Id}"),
 					Content = new StringContent(JsonSerializer.Serialize(experienceDTO), Encoding.UTF8, "application/json")
 				};
 
@@ -159,7 +159,7 @@ namespace PersonalProfileUI.Controllers
 				HttpContext.Request.Cookies.TryGetValue("token", out token);
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-				var httpResponseMessage = await client.DeleteAsync($"https://localhost:44385/api/Experience/{experienceDTO.Id}");
+				var httpResponseMessage = await client.DeleteAsync($"https://app-personalprofile-dev.azurewebsites.net/api/Experience/{experienceDTO.Id}");
 
 				httpResponseMessage.EnsureSuccessStatusCode();
 

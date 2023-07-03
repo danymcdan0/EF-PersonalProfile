@@ -32,7 +32,7 @@ namespace PersonalProfileUI.Controllers
 				var httpRequestMessage = new HttpRequestMessage()
 				{
 					Method = HttpMethod.Post,
-					RequestUri = new Uri("https://localhost:44385/api/Auth/Login"),
+					RequestUri = new Uri("https://app-personalprofile-dev.azurewebsites.net/api/Auth/Login"),
 					Content = new StringContent(JsonSerializer.Serialize(loginRequestDTO), Encoding.UTF8, "application/json")
 				};
 

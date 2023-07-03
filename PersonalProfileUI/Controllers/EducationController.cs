@@ -24,7 +24,7 @@ namespace PersonalProfileUI.Controllers
 
 			var client = httpClientFactory.CreateClient();
 
-			var httpResponseMessage = await client.GetAsync("https://localhost:44385/api/education");
+			var httpResponseMessage = await client.GetAsync("https://app-personalprofile-dev.azurewebsites.net/api/education");
 
 			httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -65,7 +65,7 @@ namespace PersonalProfileUI.Controllers
 				var httpRequestMessage = new HttpRequestMessage()
 				{
 					Method = HttpMethod.Post,
-					RequestUri = new Uri("https://localhost:44385/api/education"),
+					RequestUri = new Uri("https://app-personalprofile-dev.azurewebsites.net/api/education"),
 					Content = new StringContent(JsonSerializer.Serialize(addEducationViewModel), Encoding.UTF8, "application/json")
 				};
 
@@ -101,7 +101,7 @@ namespace PersonalProfileUI.Controllers
 				return RedirectToAction("Index", "Auth");
 			}
 
-			var response = await client.GetFromJsonAsync<EducationDTO>($"https://localhost:44385/api/education/{Id.ToString()}");
+			var response = await client.GetFromJsonAsync<EducationDTO>($"https://app-personalprofile-dev.azurewebsites.net/api/education/{Id.ToString()}");
 
             if (response != null)
             {
@@ -125,7 +125,7 @@ namespace PersonalProfileUI.Controllers
 				var httpRequestMessage = new HttpRequestMessage()
 				{
 					Method = HttpMethod.Put,
-					RequestUri = new Uri($"https://localhost:44385/api/education/{educationDTO.Id}"),
+					RequestUri = new Uri($"https://app-personalprofile-dev.azurewebsites.net/api/education/{educationDTO.Id}"),
 					Content = new StringContent(JsonSerializer.Serialize(educationDTO), Encoding.UTF8, "application/json")
 				};
 
@@ -160,7 +160,7 @@ namespace PersonalProfileUI.Controllers
 				HttpContext.Request.Cookies.TryGetValue("token", out token);
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-				var httpResponseMessage = await client.DeleteAsync($"https://localhost:44385/api/education/{educationDTO.Id}");
+				var httpResponseMessage = await client.DeleteAsync($"https://app-personalprofile-dev.azurewebsites.net/api/education/{educationDTO.Id}");
 
                 httpResponseMessage.EnsureSuccessStatusCode();
 

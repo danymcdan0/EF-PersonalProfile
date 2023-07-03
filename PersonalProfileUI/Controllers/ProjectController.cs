@@ -25,7 +25,7 @@ namespace PersonalProfileUI.Controllers
 
 			var client = httpClientFactory.CreateClient();
 
-			var httpResponseMessage = await client.GetAsync("https://localhost:44385/api/Project");
+			var httpResponseMessage = await client.GetAsync("https://app-personalprofile-dev.azurewebsites.net/api/Project");
 
 			httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -66,7 +66,7 @@ namespace PersonalProfileUI.Controllers
 				var httpRequestMessage = new HttpRequestMessage()
 				{
 					Method = HttpMethod.Post,
-					RequestUri = new Uri("https://localhost:44385/api/Project"),
+					RequestUri = new Uri("https://app-personalprofile-dev.azurewebsites.net/api/Project"),
 					Content = new StringContent(JsonSerializer.Serialize(addProjectViewModel), Encoding.UTF8, "application/json")
 				};
 
@@ -102,7 +102,7 @@ namespace PersonalProfileUI.Controllers
 				return RedirectToAction("Index", "Auth");
 			}
 
-			var response = await client.GetFromJsonAsync<ProjectDTO>($"https://localhost:44385/api/Project/{Id.ToString()}");
+			var response = await client.GetFromJsonAsync<ProjectDTO>($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{Id.ToString()}");
 
 			if (response != null)
 			{
@@ -126,7 +126,7 @@ namespace PersonalProfileUI.Controllers
 				var httpRequestMessage = new HttpRequestMessage()
 				{
 					Method = HttpMethod.Put,
-					RequestUri = new Uri($"https://localhost:44385/api/Project/{projectDTO.Id}"),
+					RequestUri = new Uri($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{projectDTO.Id}"),
 					Content = new StringContent(JsonSerializer.Serialize(projectDTO), Encoding.UTF8, "application/json")
 				};
 
@@ -161,7 +161,7 @@ namespace PersonalProfileUI.Controllers
 				HttpContext.Request.Cookies.TryGetValue("token", out token);
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-				var httpResponseMessage = await client.DeleteAsync($"https://localhost:44385/api/Project/{projectDTO.Id}");
+				var httpResponseMessage = await client.DeleteAsync($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{projectDTO.Id}");
 
 				httpResponseMessage.EnsureSuccessStatusCode();
 
