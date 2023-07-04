@@ -54,8 +54,11 @@ namespace PersonalProfileAPI.Data
                 new Experience {
                     Id = Guid.NewGuid(),
                     Company = "SpartaGlobal",
-                    Role = "C# Junior Consultant",
-                    Description = "Took part in an 8 week training course learning about...",
+                    Role = "C# Consultant",
+                    Description = "8 Week Training: Agile & Scrum, Version Control Github, SQL, C#, .NET 7, OOP, SOLD Principles, Design Patterns, Unit Testing (NUnit) & " +
+                    "Mocking (Moq), Entity Framework, LINQ, Asynchronous Programming, Rest APIs, HTML/CSS/JavaScript, ASP.NET Core MVC for API and Web, ASP.NET Core Razor Pages. " +
+                    "After training I have been in Pre-assignment awaiting placement with a client, and during this time period I have been upskilling with ASP.NET learning " +
+                    "to utilise Cookies and JWT Tokens for Authentication, and Azure for making APIs/Websites public.",
                     StartDate = new DateTime(2023, 3, 20)
                 });
 
