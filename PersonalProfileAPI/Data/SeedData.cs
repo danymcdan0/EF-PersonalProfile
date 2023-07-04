@@ -54,55 +54,66 @@ namespace PersonalProfileAPI.Data
                 new Experience {
                     Id = Guid.NewGuid(),
                     Company = "SpartaGlobal",
-                    Role = "Pre-assignment",
-                    Description = "Description",
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
-                },
-                new Experience
-                {
-                    Id = Guid.NewGuid(),
-                    Company = "Life",
-                    Role = "Existing",
-                    Description = "I didnt really get a choice tbh",
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    Role = "C# Junior Consultant",
+                    Description = "Took part in an 8 week training course learning about...",
+                    StartDate = new DateTime(2023, 3, 20)
                 });
 
             context.Education.AddRange(
                 new Education {
                     Id = Guid.NewGuid(),
                     University = "University of Essex",
-                    Course = "Bsc Computer Science",
-                    Grade = "1:1",
-                    Description = "I did 'x' courses",
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now
+                    Course = "BSC Computer Science",
+                    Grade = "1st",
+                    Description = "Studied courses: Team Project Challenge, Mathematics for Computing, Object-Oriented Programming, Intro to Databases, " +
+                    "Web Development, Human- Computer Interaction, Network Fundamentals, Fundamentals of Digital Systems, Software Engineering, Application Programming, " +
+                    "Data Structures and Algorithms, Artificial Intelligence, Computer Game Programming, Computer Security, Advanced Programming, Information Retrieval, " +
+                    "Natural Language Engineering, Computer Vision, Network Security.",
+                    StartDate = new DateTime(2018, 10, 1),
+                    EndDate = new DateTime(2021, 7, 20)
                 },
                 new Education
                 {
                     Id = Guid.NewGuid(),
                     University = "University of Essex",
-                    Course = "Msc Game Development",
-                    Grade = "1:2",
-                    Description = "I did 'x' courses",
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now
+                    Course = "MSC Game Development",
+                    Grade = "Merit",
+                    Description = "Studied courses: Game Design, Machine Learning, Group Project (Incorporating a Game Jam), " +
+                    "MSc Project & Dissertation, Game Artificial Intelligence, Physics Based Games, Mobile and Social Application Programming, " +
+                    "Professional Practice and Research Methodology.",
+                    StartDate = new DateTime(2021, 10, 1),
+                    EndDate = new DateTime(2022, 12, 1)
                 });
 
             context.Projects.AddRange(
                 new Project {
                     Id = Guid.NewGuid(),
-                    Title = "Title of Project",
+                    Title = "DropSort - Udergrad Dissertation",
                     Description = "Description of Project",
                     Aim = "Aim of Project"
                 },
                 new Project
                 {
                     Id = Guid.NewGuid(),
-                    Title = "Title of Dissertaion",
+                    Title = "5 Year Mission - Postgrad Dissertation",
                     Description = "Description of Dissertaion",
                     Aim = "Aim of Dissertaion",
+                    ImageUrl = "Image/Image.jpg"
+                },
+                new Project
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Trainee Tracker API",
+                    Description = "",
+                    Aim = "",
+                    ImageUrl = "Image/Image.jpg"
+                },
+                new Project
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Personal Profile Website",
+                    Description = "",
+                    Aim = "",
                     ImageUrl = "Image/Image.jpg"
                 });
 
