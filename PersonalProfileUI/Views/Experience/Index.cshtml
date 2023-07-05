@@ -3,35 +3,18 @@
 @{
 }
 
-<h1 class="mt-3">Experience</h1>
+<h1 class="mt-3 text-center">Experience</h1>
+<hr />
 
 <div class="d-felx justify-content-end">
 	<a class="btn btn-secondary" asp-controller="Experience" asp-action="Add">Add Experience</a>
 </div>
 
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>Role</th>
-			<th>Company</th>
-			<th>Description</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var experience in Model)
-		{
-			<tr>
-				<td>@experience.Role</td>
-				<td>@experience.Company</td>
-				<td>@experience.Description</td>
-				<td>@experience.StartDate</td>
-				<td>@experience.EndDate</td>
-				<td>
-					<a class="btn btn-light" asp-controller="Experience" asp-action="Edit" asp-route-id="@experience.Id">Edit</a>
-				</td>
-			</tr>
-		}
-	</tbody>
-</table>
+@foreach (var experience in Model)
+{
+		<h3>@experience.Company - @experience.Role</h3>
+		<h5>@experience.StartDate.ToString("MM/yyyy") - @experience.EndDate.ToString("MM/yyyy")</h5>
+		<p>@experience.Description</p>
+		<a class="btn btn-light" asp-controller="Experience" asp-action="Edit" asp-route-id="@experience.Id">Edit</a>
+	<hr />
+}

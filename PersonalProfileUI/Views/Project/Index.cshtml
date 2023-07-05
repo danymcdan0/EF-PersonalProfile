@@ -3,33 +3,18 @@
 @{
 }
 
-<h1 class="mt-3">Education</h1>
+<h1 class="mt-3 text-center">Projects</h1>
+<hr />
 
 <div class="d-felx justify-content-end">
 	<a class="btn btn-secondary" asp-controller="Project" asp-action="Add">Add Project</a>
 </div>
 
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>Aim</th>
-			<th>Description</th>
-			<th>ImageUrl</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var project in Model)
-		{
-			<tr>
-				<td>@project.Title</td>
-				<td>@project.Aim</td>
-				<td>@project.Description</td>
-				<td>@project.ImageUrl</td>
-				<td>
-					<a class="btn btn-light" asp-controller="Project" asp-action="Edit" asp-route-id="@project.Id">Edit</a>
-				</td>
-			</tr>
-		}
-	</tbody>
-</table>
+@foreach (var project in Model) 
+{
+	<h3>@project.Title</h3>
+	<h5>@project.Aim</h5>
+	<h6>@project.ImageUrl</h6>
+	<p>@project.Description</p>
+	<a class="btn btn-light" asp-controller="Experience" asp-action="Edit" asp-route-id="@project.Id">Edit</a>
+}

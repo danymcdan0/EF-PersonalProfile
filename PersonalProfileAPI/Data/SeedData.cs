@@ -55,9 +55,9 @@ namespace PersonalProfileAPI.Data
                     Id = Guid.NewGuid(),
                     Company = "SpartaGlobal",
                     Role = "Junior C# Software Developer Consultant",
-                    Description = "8 Week Training: Agile & Scrum, Version Control (Github/GIT), SQL, C#, .NET 7, OOP, SOLID Principles, Design Patterns, Unit Testing (NUnit) & " +
+                    Description = "This opportunity began with 8 Week Training: Agile & Scrum, Version Control (Github/GIT), SQL, C#, .NET 7, OOP, SOLID Principles, Design Patterns, Unit Testing (NUnit) & " +
                     "Mocking (Moq), Entity Framework, LINQ, Asynchronous Programming, Rest APIs, HTML/CSS/JavaScript, ASP.NET Core MVC, ASP.NET API, Razor Pages. " +
-                    "After training I have been in Pre-assignment awaiting placement with a client, and during this time period I have been upskilling with ASP.NET learning " +
+                    "\nAfter training I have been in Pre-assignment awaiting placement with a client, and during this time period I have been upskilling with ASP.NET learning " +
                     "to utilise Cookies and JWT Tokens for Authentication, and Azure for making APIs/Websites public.",
                     StartDate = new DateTime(2023, 3, 20)
                 });
@@ -68,7 +68,7 @@ namespace PersonalProfileAPI.Data
                     University = "University of Essex",
                     Course = "BSC Computer Science",
                     Grade = "1st",
-                    Description = "Studied courses: Team Project Challenge, Mathematics for Computing, Object-Oriented Programming, Intro to Databases, " +
+                    Description = "Team Project Challenge, Mathematics for Computing, Object-Oriented Programming, Intro to Databases, " +
                     "Web Development, Human- Computer Interaction, Network Fundamentals, Fundamentals of Digital Systems, Software Engineering, Application Programming, " +
                     "Data Structures and Algorithms, Artificial Intelligence, Computer Game Programming, Computer Security, Advanced Programming, Information Retrieval, " +
                     "Natural Language Engineering, Computer Vision, Network Security.",
@@ -81,7 +81,7 @@ namespace PersonalProfileAPI.Data
                     University = "University of Essex",
                     Course = "MSC Game Development",
                     Grade = "Merit",
-                    Description = "Studied courses: Game Design, Machine Learning, Group Project (Incorporating a Game Jam), " +
+                    Description = "Game Design, Machine Learning, Group Project (Incorporating a Game Jam), " +
                     "MSc Project & Dissertation, Game Artificial Intelligence, Physics Based Games, Mobile and Social Application Programming, " +
                     "Professional Practice and Research Methodology.",
                     StartDate = new DateTime(2021, 10, 1),
