@@ -9,31 +9,11 @@
 	<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
 </div>
 
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>University</th>
-			<th>Course</th>
-			<th>Grade</th>
-			<th>Description</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var education in Model)
-		{
-			<tr>
-				<td>@education.University</td>
-				<td>@education.Course</td>
-				<td>@education.Grade</td>
-				<td>@education.Description</td>
-				<td>@education.StartDate.ToString("MM/yyyy")</td>
-				<td>@education.EndDate.ToString("MM/yyyy")</td>
-				<td>
-					<a class="btn btn-light" asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id">Edit</a>
-				</td>
-			</tr>
-		}
-	</tbody>
-</table>
+@foreach (var education in Model)
+{
+	<h2>@education.University - @education.Course</h2>
+	<h3>@education.Grade</h3>
+	<h4>@education.StartDate.ToString("MM/yyyy") - @education.EndDate.ToString("MM/yyyy")</h4>
+	<p>@education.Description</p>
+	<hr />
+}
