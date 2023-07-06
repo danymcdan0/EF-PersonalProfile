@@ -14,7 +14,7 @@
 
 @foreach (var education in Model)
 {
-	<h3>@education.University - @education.Course (@education.Grade)</h3>
+	<h3>@education.University - <span class="cornsilk-bold">@education.Course (@education.Grade)</span></h3>
 	<h5><span class="darkmoss-bold">@education.StartDate.ToString("MM/yyyy") - @education.EndDate.ToString("MM/yyyy")</span></h5>
 	<p><span class="cornsilk-bold">Studied Courses: </span>@education.Description</p>
 	@if (this.User.IsInRole("Owner"))

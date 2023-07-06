@@ -48,3 +48,10 @@ body {
     color: #606C38;
     font-weight: bold;
 }
+
+.aim-text {
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-color: #606C38;
+}
