@@ -6,9 +6,12 @@
 <h1 class="mt-3 text-center">Projects</h1>
 <hr />
 
-<div class="d-felx justify-content-end">
-	<a class="btn btn-secondary" asp-controller="Project" asp-action="Add">Add Project</a>
-</div>
+@if (this.User.IsInRole("Owner"))
+{
+	<div class="d-felx justify-content-end">
+		<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Project</a>
+	</div>
+}
 
 @foreach (var project in Model) 
 {
@@ -16,5 +19,8 @@
 	<h5>@project.Aim</h5>
 	<h6>@project.ImageUrl</h6>
 	<p>@project.Description</p>
-	<a class="btn btn-light" asp-controller="Experience" asp-action="Edit" asp-route-id="@project.Id">Edit</a>
+	@if (this.User.IsInRole("Owner"))
+	{
+		<a class="btn btn-light" asp-controller="Project" asp-action="Edit" asp-route-id="@project.Id">Edit</a>
+	}
 }
