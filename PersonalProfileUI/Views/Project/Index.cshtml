@@ -9,7 +9,7 @@
 @if (this.User.IsInRole("Owner"))
 {
 	<div class="d-felx justify-content-end">
-		<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Project</a>
+		<a class="btn btn-secondary" asp-controller="Project" asp-action="Add">Add Project</a>
 	</div>
 }
 
@@ -23,4 +23,5 @@
 	{
 		<a class="btn btn-light" asp-controller="Project" asp-action="Edit" asp-route-id="@project.Id">Edit</a>
 	}
+	<hr />
 }

@@ -37,12 +37,7 @@ namespace PersonalProfileUI.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
-			var client = httpClientFactory.CreateClient();
-
-			var token = "";
-			HttpContext.Request.Cookies.TryGetValue("token", out token);
-
-
+			string token = HttpContext.User.FindFirst("TokenClaim").Value;
 			if (token != null)
 			{
 				return View();
@@ -54,54 +49,38 @@ namespace PersonalProfileUI.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Add(AddProjectViewModel addProjectViewModel)
 		{
-			try
+			var httpRequestMessage = new HttpRequestMessage()
 			{
-				var client = httpClientFactory.CreateClient();
+				Method = HttpMethod.Post,
+				RequestUri = new Uri("https://app-personalprofile-dev.azurewebsites.net/api/Project"),
+				Content = new StringContent(JsonSerializer.Serialize(addProjectViewModel), Encoding.UTF8, "application/json")
+			};
 
-				var token = "";
-
-				HttpContext.Request.Cookies.TryGetValue("token", out token);
-				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-				var httpRequestMessage = new HttpRequestMessage()
-				{
-					Method = HttpMethod.Post,
-					RequestUri = new Uri("https://app-personalprofile-dev.azurewebsites.net/api/Project"),
-					Content = new StringContent(JsonSerializer.Serialize(addProjectViewModel), Encoding.UTF8, "application/json")
-				};
-
-				var httpResponseMessage = await client.SendAsync(httpRequestMessage);
-				httpResponseMessage.EnsureSuccessStatusCode();
-
-				var response = await httpResponseMessage.Content.ReadFromJsonAsync<ProjectDTO>();
-
-				if (response != null)
-				{
-					return RedirectToAction("Index", "Project");
-				}
-
-				return View();
-			}
-			catch (Exception)
+			var httpResponseMessage = await ClientResponse(httpRequestMessage);
+			if (!httpResponseMessage.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index", "Auth");
 			}
 
+			var response = await httpResponseMessage.Content.ReadFromJsonAsync<ProjectDTO>();
+			if (response != null)
+			{
+				return RedirectToAction("Index", "Project");
+			}
+
+			return View();
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> Edit(Guid Id)
 		{
-			var client = httpClientFactory.CreateClient();
-
-			var token = "";
-			HttpContext.Request.Cookies.TryGetValue("token", out token);
-
+			string token = HttpContext.User.FindFirst("TokenClaim").Value;
 			if (token == null)
 			{
 				return RedirectToAction("Index", "Auth");
 			}
 
+			var client = httpClientFactory.CreateClient();
 			var response = await client.GetFromJsonAsync<ProjectDTO>($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{Id.ToString()}");
 
 			if (response != null)
@@ -115,62 +94,55 @@ namespace PersonalProfileUI.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(ProjectDTO projectDTO)
 		{
-			try
+			var httpRequestMessage = new HttpRequestMessage()
 			{
-				var client = httpClientFactory.CreateClient();
-				var token = "";
+				Method = HttpMethod.Put,
+				RequestUri = new Uri($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{projectDTO.Id}"),
+				Content = new StringContent(JsonSerializer.Serialize(projectDTO), Encoding.UTF8, "application/json")
+			};
 
-				HttpContext.Request.Cookies.TryGetValue("token", out token);
-				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-				var httpRequestMessage = new HttpRequestMessage()
-				{
-					Method = HttpMethod.Put,
-					RequestUri = new Uri($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{projectDTO.Id}"),
-					Content = new StringContent(JsonSerializer.Serialize(projectDTO), Encoding.UTF8, "application/json")
-				};
-
-				var httpResponseMessage = await client.SendAsync(httpRequestMessage);
-				httpResponseMessage.EnsureSuccessStatusCode();
-
-				var response = await httpResponseMessage.Content.ReadFromJsonAsync<ProjectDTO>();
-
-				if (response == null)
-				{
-					return RedirectToAction("Edit", "Project");
-				}
-
-				return RedirectToAction("Index", "Project"); ;
-			}
-			catch (Exception)
+			var httpResponseMessage = await ClientResponse(httpRequestMessage);
+			if (!httpResponseMessage.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index", "Auth");
 			}
+
+			var response = await httpResponseMessage.Content.ReadFromJsonAsync<ProjectDTO>();
+			if (response == null)
+			{
+				return RedirectToAction("Edit", "Project");
+			}
+
+			return RedirectToAction("Index", "Project"); ;
 
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Delete(ProjectDTO projectDTO)
 		{
-			try
-			{
-				var client = httpClientFactory.CreateClient();
+			var client = httpClientFactory.CreateClient();
+			string token = HttpContext.User.FindFirst("TokenClaim").Value;
 
-				var token = "";
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-				HttpContext.Request.Cookies.TryGetValue("token", out token);
-				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-				var httpResponseMessage = await client.DeleteAsync($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{projectDTO.Id}");
-
-				httpResponseMessage.EnsureSuccessStatusCode();
-
-				return RedirectToAction("Index", "Project");
-			}
-			catch (Exception)
+			var httpResponseMessage = await client.DeleteAsync($"https://app-personalprofile-dev.azurewebsites.net/api/Project/{projectDTO.Id}");
+			if (!httpResponseMessage.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index", "Auth");
 			}
+
+			return RedirectToAction("Index", "Project");
+		}
+
+		private async Task<HttpResponseMessage> ClientResponse(HttpRequestMessage message)
+		{
+			var client = httpClientFactory.CreateClient();
+
+			string token = HttpContext.User.FindFirst("TokenClaim").Value;
+
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+			return await client.SendAsync(message);
 		}
 	}
 }
