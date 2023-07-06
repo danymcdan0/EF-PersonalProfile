@@ -5,15 +5,21 @@
 
 <h1 class="mt-3 text-center" >Education</h1>
 <hr class="text-light"/>
-
-<div class="d-felx justify-content-end">
-	<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
-</div>
+@if (this.User.IsInRole("Owner"))
+{
+	<div class="d-felx justify-content-end">
+		<a class="btn btn-secondary" asp-controller="Education" asp-action="Add">Add Education</a>
+	</div>
+}
 
 @foreach (var education in Model)
 {
 	<h3>@education.University - @education.Course (@education.Grade)</h3>
 	<h5>@education.StartDate.ToString("MM/yyyy") - @education.EndDate.ToString("MM/yyyy")</h5>
 	<p><span class="text-warning">Studied Courses: </span>@education.Description</p>
+	@if (this.User.IsInRole("Owner"))
+	{
+		<a class="btn btn-light" asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id">Edit</a>
+	}
 	<hr />
 }

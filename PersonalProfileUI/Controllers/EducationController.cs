@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PersonalProfileUI.Models;
 using PersonalProfileUI.Models.DTOs;
 using System.Net.Http.Headers;
@@ -34,15 +35,14 @@ namespace PersonalProfileUI.Controllers
 		}
 
         [HttpGet]
+		//[Authorize(Roles ="Owner")]
         public async Task<IActionResult> Add() 
         {
 			var client = httpClientFactory.CreateClient();
 
-			var token = "";
-			HttpContext.Request.Cookies.TryGetValue("token", out token);
+			string token = HttpContext.User.FindFirst("TokenClaim").Value;
 
-
-            if (token != null)
+			if (token != null)
             {
                 return View();
             }
@@ -57,9 +57,8 @@ namespace PersonalProfileUI.Controllers
             {
 				var client = httpClientFactory.CreateClient();
 
-				var token = "";
+				string token = HttpContext.User.FindFirst("TokenClaim").Value;
 
-				HttpContext.Request.Cookies.TryGetValue("token", out token);
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
 				var httpRequestMessage = new HttpRequestMessage()
@@ -93,8 +92,7 @@ namespace PersonalProfileUI.Controllers
         {
             var client = httpClientFactory.CreateClient();
 
-			var token = "";
-			HttpContext.Request.Cookies.TryGetValue("token", out token);
+			string token = HttpContext.User.FindFirst("TokenClaim").Value;
 
 			if (token == null)
 			{
@@ -117,9 +115,8 @@ namespace PersonalProfileUI.Controllers
             try
             {
 				var client = httpClientFactory.CreateClient();
-				var token = "";
+				string token = HttpContext.User.FindFirst("TokenClaim").Value;
 
-				HttpContext.Request.Cookies.TryGetValue("token", out token);
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
 				var httpRequestMessage = new HttpRequestMessage()
@@ -155,9 +152,8 @@ namespace PersonalProfileUI.Controllers
             {
                 var client = httpClientFactory.CreateClient();
 
-				var token = "";
+				string token = HttpContext.User.FindFirst("TokenClaim").Value;
 
-				HttpContext.Request.Cookies.TryGetValue("token", out token);
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
 				var httpResponseMessage = await client.DeleteAsync($"https://app-personalprofile-dev.azurewebsites.net/api/education/{educationDTO.Id}");
