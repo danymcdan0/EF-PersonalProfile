@@ -16,7 +16,14 @@
 @foreach (var experience in Model)
 {
 	<h3>@experience.Company - <span class="cornsilk-bold">@experience.Role</span></h3>
-	<h5><span class="darkmoss-bold">@experience.StartDate.ToString("MM/yyyy") - @experience.EndDate.ToString("MM/yyyy")</span></h5>
+	@if (experience.EndDate < new DateTime(2020, 1, 1))
+	{
+		<h5><span class="darkmoss-bold">@experience.StartDate.ToString("MM/yyyy") - Current</span></h5>
+	}
+	else
+	{
+		<h5><span class="darkmoss-bold">@experience.StartDate.ToString("MM/yyyy") - @experience.EndDate.ToString("MM/yyyy")</span></h5>
+	}
 	<p>@experience.Description</p>
 	@if (this.User.IsInRole("Owner"))
 	{
