@@ -34,4 +34,17 @@ body {
     font-weight: bold;
 }
 
+.cornsilk-bold {
+    color: #FEFAE0;
+    font-weight: bold;
+}
 
+.paynesgrey-bold {
+    color: #666A86;
+    font-weight: bold;
+}
+
+.darkmoss-bold {
+    color: #606C38;
+    font-weight: bold;
+}

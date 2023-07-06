@@ -4,7 +4,7 @@
 }
 
 <h1 class="mt-3 text-center" >Education</h1>
-<hr class="text-light"/>
+<hr class="cornsilk-bold" />
 @if (this.User.IsInRole("Owner"))
 {
 	<div class="d-felx justify-content-end">
@@ -15,11 +15,11 @@
 @foreach (var education in Model)
 {
 	<h3>@education.University - @education.Course (@education.Grade)</h3>
-	<h5>@education.StartDate.ToString("MM/yyyy") - @education.EndDate.ToString("MM/yyyy")</h5>
-	<p><span class="text-warning">Studied Courses: </span>@education.Description</p>
+	<h5><span class="darkmoss-bold">@education.StartDate.ToString("MM/yyyy") - @education.EndDate.ToString("MM/yyyy")</span></h5>
+	<p><span class="cornsilk-bold">Studied Courses: </span>@education.Description</p>
 	@if (this.User.IsInRole("Owner"))
 	{
 		<a class="btn btn-light" asp-controller="Education" asp-action="Edit" asp-route-id="@education.Id">Edit</a>
 	}
-	<hr />
+	<hr class="paynesgrey-bold" />
 }

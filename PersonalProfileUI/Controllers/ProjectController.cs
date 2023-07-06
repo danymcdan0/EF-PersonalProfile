@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NuGet.Packaging;
 using PersonalProfileUI.Models;
 using PersonalProfileUI.Models.DTOs;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
