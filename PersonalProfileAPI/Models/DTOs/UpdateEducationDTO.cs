@@ -16,7 +16,6 @@ namespace PersonalProfileAPI.Models.DTOs
         [MaxLength(10, ErrorMessage = "10 Characters Max")]
         public string Grade { get; set; }
 
-        [MaxLength(200, ErrorMessage = "200 Characters Max")]
         public string? Description { get; set; }
 
         [Required]

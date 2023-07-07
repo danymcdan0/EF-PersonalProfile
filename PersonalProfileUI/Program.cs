@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 namespace PersonalProfileUI
@@ -12,6 +13,16 @@ namespace PersonalProfileUI
 			builder.Services.AddControllersWithViews();
 
 			builder.Services.AddHttpClient();
+
+			//Adding cookie Auth: 
+			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+				options => {
+					//Redirect UnAuthenticated users here
+					options.LoginPath = "/Auth/Index";
+					//Choose name of the auth cookie
+					options.Cookie.Name = "PP_auth_cookie";
+					//options.AccessDeniedPath = "/Auth/AccessDenied";
+				});
 
 			var app = builder.Build();
 
