@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+
 namespace PersonalProfileUI
 {
 	public class Program
@@ -34,7 +36,11 @@ namespace PersonalProfileUI
 			}
 
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+			app.UseStaticFiles(new StaticFileOptions {
+				FileProvider= new PhysicalFileProvider(Path.Combine(
+					Directory.GetCurrentDirectory(), "Images")),
+				RequestPath="/Images"
+			});
 
 			app.UseRouting();
 

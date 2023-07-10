@@ -26,7 +26,7 @@ namespace PersonalProfileAPI.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             var educationDomains = await educationRepository.GetAllAsync();
-            var educactionDTOs = mapper.Map<List<EducationDTO>>(educationDomains);
+			var educactionDTOs = mapper.Map<List<EducationDTO>>(educationDomains);
             return Ok(educactionDTOs);
         }
 
