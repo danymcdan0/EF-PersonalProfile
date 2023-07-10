@@ -17,10 +17,7 @@
 {
 	<h3><span class="cornsilk-bold"><a href="@project.Link">@project.Title</a></span></h3>
 	<p><span class="aim-text">@project.Aim</span></p>
-	@if (project.ImageUrl is not null)
-	{
-		<img src="@project.ImageUrl" alt="@project.Title Image">	
-	}
+	<img src="@project.ImageUrl" alt="@project.Title Image" />
 
 	<p>@project.Description</p>
 	@if (this.User.IsInRole("Owner"))
