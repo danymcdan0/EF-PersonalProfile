@@ -91,7 +91,7 @@ namespace PersonalProfileAPI.Data
             context.Projects.AddRange(
                 new Project {
                     Id = Guid.NewGuid(),
-                    Title = "Drop Sort - Udergrad Dissertation",
+                    Title = "Drop Sort - Undergrad Dissertation",
                     Description = "Drop Sort aims to tackle a core part of Pivotal Response Treatment known as conditional discrimination through training multiple cue " +
                     "responding which is where when asked the question: \"What color is the cat?\" The response of the child is \"meow\" instead of the color of the cat " +
                     "as the child only recognized 'cat'. Drop Sort is a sorting game created with C# in Unity utilising its navmesh agents, rigidbody, ontrigger methods " +

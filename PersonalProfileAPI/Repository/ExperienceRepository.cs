@@ -32,7 +32,7 @@ namespace PersonalProfileAPI.Repository
 
         public async Task<List<Experience>> GetAllAsync()
         {
-            return await dbContext.Experiences.ToListAsync();
+            return await dbContext.Experiences.OrderByDescending(x => x.StartDate).ToListAsync();
         }
 
         public async Task<Experience?> GetByIdAsync(Guid id)
