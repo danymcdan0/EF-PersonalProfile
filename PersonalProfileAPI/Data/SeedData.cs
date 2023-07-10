@@ -99,8 +99,8 @@ namespace PersonalProfileAPI.Data
                     "over time to see the improvements of the player by a therapist which was one of the main aims of the project.",
                     Aim = "Drop Sort is a game targeted towards providing aid in the development of children with Autistic Spectrum Disorder. " +
                     "The objective of Drop Sort is to help reduce the strain on therapeutic services by exploring the fact that Children with autism are known to be \"heavy use gamers.\"",
-                    ImageUrl = "Images/TherapeuticGame.png"
-                },
+					          ImageUrl = "Images/DropSort.png"
+				        },
                 new Project
                 {
                     Id = Guid.NewGuid(),
