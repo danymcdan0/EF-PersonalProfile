@@ -22,7 +22,7 @@ namespace PersonalProfileAPI.Repository
 
         public async Task<List<Education>> GetAllAsync()
         {
-            return await dbContext.Education.OrderByDescending(x => x.StartDate).ToListAsync();
+            return await dbContext.Education.OrderBy(x => x.StartDate).ToListAsync();
         }
 
         public async Task<Education?> GetByIdAsync(Guid id)
