@@ -15,9 +15,9 @@
 
 @foreach (var project in Model) 
 {
-	<h3><span class="cornsilk-bold">@project.Title</span></h3>
+	<h3><span class="cornsilk-bold"><a href="@project.Link">@project.Title</a></span></h3>
 	<p><span class="aim-text">@project.Aim</span></p>
-	<img src="Images/DropSort.png" alt="[@project.Title.ToLower() Image]" />
+	<img src="@project.ImageUrl" alt="@project.Title Image" />
 	<p>@project.Description</p>
 	@if (this.User.IsInRole("Owner"))
 	{

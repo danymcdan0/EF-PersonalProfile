@@ -91,7 +91,7 @@ namespace PersonalProfileAPI.Data
             context.Projects.AddRange(
                 new Project {
                     Id = Guid.NewGuid(),
-                    Title = "Drop Sort - Udergrad Dissertation",
+                    Title = "Drop Sort - Undergrad Dissertation",
                     Description = "Drop Sort aims to tackle a core part of Pivotal Response Treatment known as conditional discrimination through training multiple cue " +
                     "responding which is where when asked the question: \"What color is the cat?\" The response of the child is \"meow\" instead of the color of the cat " +
                     "as the child only recognized 'cat'. Drop Sort is a sorting game created with C# in Unity utilising its navmesh agents, rigidbody, ontrigger methods " +
@@ -99,8 +99,8 @@ namespace PersonalProfileAPI.Data
                     "over time to see the improvements of the player by a therapist which was one of the main aims of the project.",
                     Aim = "Drop Sort is a game targeted towards providing aid in the development of children with Autistic Spectrum Disorder. " +
                     "The objective of Drop Sort is to help reduce the strain on therapeutic services by exploring the fact that Children with autism are known to be \"heavy use gamers.\"",
-					ImageUrl = "Images/DropSort.png"
-				},
+					          ImageUrl = "Images/DropSort.png"
+				        },
                 new Project
                 {
                     Id = Guid.NewGuid(),
@@ -129,7 +129,7 @@ namespace PersonalProfileAPI.Data
                     Aim = "The primary objective of this project is to provide an efficient and user-friendly platform that allows trainees to update their progress " +
                     "on a weekly basis, enables trainers to view trainee trackers, and empowers trainees to create, edit, and delete their own trackers.",
                     ImageUrl = "Images/TraineeTracker.png"
-				},
+                },
                 new Project
                 {
                     Id = Guid.NewGuid(),
