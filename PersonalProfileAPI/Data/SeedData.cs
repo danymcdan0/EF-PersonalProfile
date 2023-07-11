@@ -98,7 +98,8 @@ namespace PersonalProfileAPI.Data
                     "and much more, where the player has to sort entities correctly according to cues, getting increasingly difficult over time. Further progress is saved " +
                     "over time to see the improvements of the player by a therapist which was one of the main aims of the project.",
                     Aim = "Drop Sort is a game targeted towards providing aid in the development of children with Autistic Spectrum Disorder. " +
-                    "The objective of Drop Sort is to help reduce the strain on therapeutic services by exploring the fact that Children with autism are known to be \"heavy use gamers.\""
+                    "The objective of Drop Sort is to help reduce the strain on therapeutic services by exploring the fact that Children with autism are known to be \"heavy use gamers.\"",
+                    ImageUrl = "Images/DropSort.png"
                 },
                 new Project
                 {
@@ -114,7 +115,7 @@ namespace PersonalProfileAPI.Data
                     "the necessary resources for the final 5 Year Mission home. The game presents various scenarios in which the player is typically given two options, " +
                     "attachment or progression of the game where their decisions are recorded to be analysed for the research purpose of this project.",
                     Aim = "5 Year Mission is a colony simulation game targeted toward understanding the decision-making process of an individual while playing a game.",
-                    ImageUrl = "Image/Image.jpg"
+					ImageUrl = "Images/5YM.png"
                 },
                 new Project
                 {
@@ -127,8 +128,8 @@ namespace PersonalProfileAPI.Data
                     "between the user interface and the underlying data.",
                     Aim = "The primary objective of this project is to provide an efficient and user-friendly platform that allows trainees to update their progress " +
                     "on a weekly basis, enables trainers to view trainee trackers, and empowers trainees to create, edit, and delete their own trackers.",
-                    ImageUrl = "Image/Image.jpg"
-                },
+					ImageUrl = "Images/TraineeTracker.png"
+				},
                 new Project
                 {
                     Id = Guid.NewGuid(),
@@ -142,8 +143,8 @@ namespace PersonalProfileAPI.Data
                     "New features or improvements will be worked on consistently regarding the information displayed on the site.  " +
                     "The result so far of this project is the site you are currently viewing!",
                     Aim = "To create a public facing online CV, utilising ASP.NET skills that I have learnt, containing all relevant information to do with me and my career in computer sceince.",
-                    ImageUrl = "Image/Image.jpg"
-                });
+					ImageUrl = "Images/PersonalProfile.png"
+				});
 
             context.SaveChanges();
             #endregion
