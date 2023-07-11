@@ -34,7 +34,7 @@ namespace PersonalProfileAPI.Data
                 Email = "danyal-1999@hotmail.com",
                 EmailConfirmed = true
             };
-            userManager.CreateAsync(danyal, "PPPassw0rd?").GetAwaiter().GetResult();
+            userManager.CreateAsync(danyal, "PPPassw0rd?").GetAwaiter().GetResult(); //Published version has different details
 
             context.UserRoles.Add(new IdentityUserRole<string> {
                     UserId = userManager.GetUserIdAsync(danyal).Result,
